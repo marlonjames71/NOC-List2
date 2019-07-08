@@ -37,6 +37,7 @@ class NOCListTableViewController: UITableViewController {
 		cell.detailTextLabel?.text = agent.realName
 		if agent.compromised == true {
 			cell.backgroundColor = #colorLiteral(red: 1, green: 0.190891893, blue: 0.4019592953, alpha: 1)
+			cell.tintColor = .black
 		} else {
 			cell.backgroundColor = #colorLiteral(red: 0.1215686275, green: 0.1294117647, blue: 0.1411764706, alpha: 1)
 			cell.textLabel?.textColor = .white
