@@ -10,68 +10,41 @@ import UIKit
 
 class NOCListTableViewController: UITableViewController {
 
+	var agents: [(coverName: String, realName: String, accessLevel: Int, compromised: Bool)] = []
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Agents"
+		loadNOCList()
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
 
+	override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+		return "\(compromisedCount()) agents compromised"
+	}
+	
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return agents.count
     }
 
-    /*
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AgentCell", for: indexPath)
+		let agent = agents[indexPath.row]
+		cell.textLabel?.text = agent.coverName
+		cell.detailTextLabel?.text = agent.realName
+		if agent.compromised == true {
+			cell.backgroundColor = UIColor(hue: 0, saturation: 0.4, brightness: 0.9, alpha: 1.0)
+		} else {
+			cell.backgroundColor = .white
+		}
         return cell
     }
-    */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation
@@ -83,4 +56,31 @@ class NOCListTableViewController: UITableViewController {
     }
     */
 
+	
+	private func loadNOCList() {
+		let agentOne = (coverName: "Ethan Hunt", realName: "Tom Cruise", accessLevel: 8, compromised: true)
+		let agentTwo = (coverName: "Jim Phelps", realName: "Jon Voight", accessLevel: 9, compromised: false)
+		let agentThree = (coverName: "Claire Phelps", realName: "Emmanuelle Beart", accessLevel: 5, compromised: false)
+		let agentFour = (coverName: "Eugene Kittridge", realName: "Henry Czerny", accessLevel: 10, compromised: true)
+		let agentFive = (coverName: "Franz Krieger", realName: "Jean Reno", accessLevel: 4, compromised: false)
+		let agentSix = (coverName: "Luther Stickell", realName: "Ving Rhames", accessLevel: 4, compromised: false)
+		let agentSeven = (coverName: "Sarah Davies", realName: "Kristin Scott Thomas", accessLevel: 5, compromised: true)
+		let agentEight = (coverName: "Max RotGrab", realName: "Vanessa Redgrave", accessLevel: 4, compromised: false)
+		let agentNine = (coverName: "Hannah Williams", realName: "Ingeborga Dapkūnaitė", accessLevel: 5, compromised: true)
+		let agentTen = (coverName: "Jack Harmon", realName: "Emilio Estevez", accessLevel: 6, compromised: true)
+		let agentEleven = (coverName: "Frank Barnes", realName: "Dale Dye", accessLevel: 9, compromised: false)
+		
+		agents = [agentOne, agentTwo, agentThree, agentFour, agentFive, agentSix, agentSeven, agentEight, agentNine, agentTen, agentEleven]
+	}
+	
+	private func compromisedCount() -> String {
+		var count = 0
+		for agent in agents {
+			if agent.compromised == true {
+				count += 1
+			}
+		}
+		return "\(count)"
+	}
+	
 }
