@@ -10,20 +10,21 @@ import UIKit
 
 class AgentDetailViewController: UIViewController {
 	
-	var agent: (covername: String, realName: String, accessLevel: Int, compromised: Bool)!
+	var agent: (coverName: String, realName: String, accessLevel: Int, compromised: Bool)!
 
+	@IBOutlet weak var coverNameLabel: UILabel!
 	@IBOutlet weak var realNameLabel: UILabel!
 	@IBOutlet weak var accessLabel: UILabel!
 	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		
-		title = "Cover: \(agent.covername)"
+		title = "Agent Info"
+		coverNameLabel.text = agent.coverName
 		realNameLabel.text = agent.realName
 		accessLabel.text = "\(agent.accessLevel)"
 		if agent.compromised == true {
-			view.backgroundColor = UIColor(hue: 0, saturation: 0.4, brightness: 0.9, alpha: 1.0)
+			view.backgroundColor = #colorLiteral(red: 1, green: 0.190891893, blue: 0.4019592953, alpha: 1)
 		}
     }
 }
